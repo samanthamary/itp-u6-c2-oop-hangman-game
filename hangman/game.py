@@ -46,12 +46,6 @@ class HangmanGame(object):
         self.previous_guesses = []
         self.word = GuessWord(HangmanGame.select_random_word(self.word_list))
          
-    def select_random_word(list_of_words):
-        if not list_of_words:
-            raise InvalidListOfWordsException
-        random_word = random.choice(list_of_words)
-        return random_word
-    
     def guess(self, letter):
         if self.is_finished():
             raise GameFinishedException
@@ -74,6 +68,11 @@ class HangmanGame(object):
     def is_won(self):
         return self.word.answer == self.word.masked
     
+    @classmethod
+    def select_random_word(cls, word_list):
+        if not word_list:
+            raise InvalidListOfWordsException()
+        return random.choice(word_list)
             
         
          
